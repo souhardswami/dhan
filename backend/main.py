@@ -2,10 +2,16 @@ from typing import List
 import fastapi as _fastapi
 import sqlalchemy.orm as _orm
 import services as _services, schemas as _schemas
-
+from fastapi.middleware.cors import CORSMiddleware
 import datetime as _dt
 
 app = _fastapi.FastAPI()
+
+app.add_middleware(CORSMiddleware,
+                   allow_origins=["*"],
+                   allow_credentials=True,
+                   allow_methods=["*"],
+                   allow_headers=["*"])
 
 
 def validate_dates(start_date: _dt.date, end_date: _dt.date):
